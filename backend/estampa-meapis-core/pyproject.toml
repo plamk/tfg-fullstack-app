@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meapis"
+version = "0.1.0"
+description = "Meapis core runtime (camera + scheduler + gpio) used by FastAPI."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "pillow",
+  "coloredlogs",
+  "apscheduler<4.0.0",
+  "watchdog",
+]
+
+[tool.setuptools]
+packages = ["meapis"]
+
+[tool.setuptools.package-data]
+meapis = ["camera/tuning/*.json"]

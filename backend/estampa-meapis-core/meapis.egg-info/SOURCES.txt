@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+meapis/__init__.py
+meapis/environment.py
+meapis/meapis.py
+meapis/project.py
+meapis.egg-info/PKG-INFO
+meapis.egg-info/SOURCES.txt
+meapis.egg-info/dependency_links.txt
+meapis.egg-info/requires.txt
+meapis.egg-info/top_level.txt
+meapis/camera/tuning/imx708_noir.json
+meapis/camera/tuning/ov64a40.json

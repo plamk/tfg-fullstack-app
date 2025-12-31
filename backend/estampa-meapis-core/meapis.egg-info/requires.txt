@@ -1,0 +1,5 @@
+numpy
+pillow
+coloredlogs
+apscheduler<4.0.0
+watchdog

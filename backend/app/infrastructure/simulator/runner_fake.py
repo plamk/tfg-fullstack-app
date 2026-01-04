@@ -21,7 +21,10 @@ class FakeRunner:
 
         initial = self._read_text(self.current_file)
         if initial:
-            self.start_project(initial)
+            try:
+                self.start_project(initial)
+            except FileNotFoundError:
+                self.curr_project = None
 
     # --- helpers ---
     def _read_text(self, path: Path) -> str:
@@ -40,7 +43,13 @@ class FakeRunner:
     def list_projects(self) -> list[str]:
         if not self.projects_dir.exists():
             return []
-        return sorted([p.name for p in self.projects_dir.iterdir() if p.is_dir()])
+
+        return sorted(
+            p.name for p in self.projects_dir.iterdir()
+            if p.is_dir()
+            and not p.name.startswith(".")
+            and (p / "config.json").exists()
+        )
 
     def start_project(self, name: str) -> None:
         cfg_path = self.projects_dir / name / "config.json"

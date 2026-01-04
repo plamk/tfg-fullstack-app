@@ -53,6 +53,8 @@ class FakeRunner:
 
     def start_project(self, name: str) -> None:
         cfg_path = self.projects_dir / name / "config.json"
+        if not cfg_path.exists():
+            raise FileNotFoundError(str(cfg_path))
         cfg = self._read_json(cfg_path)
 
         self.curr_project = {

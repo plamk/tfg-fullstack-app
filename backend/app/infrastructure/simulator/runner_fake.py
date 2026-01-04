@@ -3,7 +3,7 @@ from datetime import datetime
 import json
 from apscheduler.schedulers.background import BackgroundScheduler
 from PIL import Image, ImageDraw
-
+from app.infrastructure.projects_fs import discover_projects
 
 class FakeRunner:
     def __init__(self, data_dir: Path):
@@ -41,15 +41,7 @@ class FakeRunner:
 
     # --- API del runner ---
     def list_projects(self) -> list[str]:
-        if not self.projects_dir.exists():
-            return []
-
-        return sorted(
-            p.name for p in self.projects_dir.iterdir()
-            if p.is_dir()
-            and not p.name.startswith(".")
-            and (p / "config.json").exists()
-        )
+        return discover_projects(self.projects_dir)
 
     def start_project(self, name: str) -> None:
         cfg_path = self.projects_dir / name / "config.json"

@@ -63,6 +63,14 @@ class ProjectRunner:
         if self.camera_controller:
             self.camera_controller.close()
 
+    def capture_now(self) -> dict:
+        if not self.camera_controller:
+            raise RuntimeError("No hay proyecto activo")
+
+        return self.camera_controller.take_picture()
+
+
+
     # def current_project_change(self, event):
     #     print(event)
     #
